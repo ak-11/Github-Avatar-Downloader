@@ -4,6 +4,7 @@
   "description": "## Problem Statement",
   "main": "index.js",
   "scripts": {
+    "start": "node download_avatars.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/ak-11/Github-Avatar-Downloader/issues"
   },
-  "homepage": "https://github.com/ak-11/Github-Avatar-Downloader#readme"
+  "homepage": "https://github.com/ak-11/Github-Avatar-Downloader#readme",
+  "dependencies": {
+    "request": "^2.78.0"
+  }
 }

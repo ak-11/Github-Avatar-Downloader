@@ -40,7 +40,23 @@ function downloadImageByURL(url, filepath)  {
     .pipe(fs.createWriteStream(filepath))
 }
 
-getRepoContributors("jquery", "jquery", function (url) {
+// getRepoContributors("jquery", "jquery", function (url) {
+//   url.forEach(function (element) {
+//     let url = element.avatar_url
+//     let filepath = `./avatars/${element.login}.jpg`
+
+//     console.log(url, filepath)
+//     downloadImageByURL(url, filepath)
+//     console.log(element["avatar_url"]);
+//   })
+// })
+let owner = process.argv[2];
+let repo = process.argv[3];
+
+// const ownerRepo = process.argv.slice(-2);
+
+
+getRepoContributors(owner, repo, function (url) {
   url.forEach(function (element) {
     let url = element.avatar_url
     let filepath = `./avatars/${element.login}.jpg`
@@ -50,6 +66,8 @@ getRepoContributors("jquery", "jquery", function (url) {
     console.log(element["avatar_url"]);
   })
 })
+
+
   // request.get("https://github.com/jquery/jquery")
   // .on("error", function (err) {
   //  console.log(err);

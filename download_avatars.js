@@ -27,7 +27,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
       console.log(response);
     }
   });
-}
+};
 
 function downloadImageByURL(url, filepath)  {
   request.get(url)
@@ -37,8 +37,24 @@ function downloadImageByURL(url, filepath)  {
     .on("response", function (response) {
      console.log(response.statusMessage, response.headers["content-type"]);
     })
-    .pipe(fs.createWriteStream(filepath))
-}
+    .pipe(fs.createWriteStream(filepath));
+};
+
+let owner = process.argv[2];
+let repo = process.argv[3];
+// const ownerRepo = process.argv.slice(-2);
+getRepoContributors(owner, repo, function (url) {
+  url.forEach(function (element) {
+    let url = element.avatar_url;
+    let filepath = `./avatars/${element.login}.jpg`;
+
+    console.log(url, filepath);
+    downloadImageByURL(url, filepath);
+    console.log(element["avatar_url"]);
+  })
+});
+
+
 
 // getRepoContributors("jquery", "jquery", function (url) {
 //   url.forEach(function (element) {
@@ -50,42 +66,4 @@ function downloadImageByURL(url, filepath)  {
 //     console.log(element["avatar_url"]);
 //   })
 // })
-let owner = process.argv[2];
-let repo = process.argv[3];
-
-// const ownerRepo = process.argv.slice(-2);
-
-
-getRepoContributors(owner, repo, function (url) {
-  url.forEach(function (element) {
-    let url = element.avatar_url
-    let filepath = `./avatars/${element.login}.jpg`
-
-    console.log(url, filepath)
-    downloadImageByURL(url, filepath)
-    console.log(element["avatar_url"]);
-  })
-})
-
-
-  // request.get("https://github.com/jquery/jquery")
-  // .on("error", function (err) {
-  //  console.log(err);
-  // })
-  // .on("response", function (response) {
-  //  console.log(response.statusMessage, response.headers["content-type"]);
-  // })
-  // .pipe(fs.createWriteStream("./avatar.jpg"))
-// function callback(err, result) {
-
-// }
-// request.get("https://github.com/jquery/jquery")
-//   .on("error", function (err) {
-//    console.log(err);
-//   })
-//   .on("response", function (response) {
-//    console.log(response.statusMessage, response.headers["content-type"]);
-//   })
-
-
 
